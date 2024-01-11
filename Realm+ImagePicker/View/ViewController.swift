@@ -15,9 +15,7 @@ class ViewController: UIViewController {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
-        layout.itemSize = CGSize(width: 1000, height: 100)
+        layout.itemSize = CGSize(width: view.frame.size.width / 5, height: view.frame.size.height / 5)
         
         let collection = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -36,7 +34,7 @@ class ViewController: UIViewController {
     
     lazy var addImageAction = UIAction { _ in
         var config = PHPickerConfiguration()
-        config.selectionLimit = 3
+        config.selectionLimit = 5
         
         let pickerVC = PHPickerViewController(configuration: config)
         pickerVC.delegate = self
@@ -74,3 +72,5 @@ extension ViewController: PHPickerViewControllerDelegate {
         }
     }
 }
+
+
