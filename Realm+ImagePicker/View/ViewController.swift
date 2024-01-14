@@ -38,12 +38,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         navigationItem.rightBarButtonItem = addImage
     }
     
-    private func loadData() {
-        for image in images {
-            
-        }
-    }
-    
     lazy var addImageAction = UIAction { _ in
         var config = PHPickerConfiguration()
         config.selectionLimit = 5

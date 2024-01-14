@@ -17,7 +17,7 @@ class RealmManager {
     
     func saveImage(imageData: Data) {
         var path = urlPath()
-        var name = "\(imageData.description).jpeg"
+        let name = "\(imageData.description).jpeg"
         
         path.append(path: name)
         do {
