@@ -7,9 +7,10 @@
 import PhotosUI
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDelegate {
     
     private var images: [UIImage] = []
+    private var realmMmanager = RealmManager()
     
     lazy var collection = {
         
@@ -20,6 +21,7 @@ class ViewController: UIViewController {
         let collection = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collection.dataSource = self
+        collection.delegate = self
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.backgroundColor = .gray
         return collection
@@ -28,8 +30,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(collection)
+        addNavigationItem()
+    }
+    
+    private func addNavigationItem() {
         let addImage = UIBarButtonItem(systemItem: .add, primaryAction: addImageAction)
         navigationItem.rightBarButtonItem = addImage
+    }
+    
+    private func loadData() {
+        for image in images {
+            
+        }
     }
     
     lazy var addImageAction = UIAction { _ in
@@ -56,21 +68,26 @@ extension ViewController: UICollectionViewDataSource {
     }
 }
 
-// add photo from ImagePicker to CollectionView
+// add photo from ImagePicker to CollectionView and save it in app directory
 extension ViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
         for result in results {
             result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
                 if let image = object as? UIImage {
-                    self.images.append(image)
+                    if let imageData = image.jpegData(compressionQuality: 0.1) {
+                        self.realmMmanager.saveImage(imageData: imageData)
+                        self.images.append(image)
+                    }
                 }
                 DispatchQueue.main.async {
                     self.collection.reloadData()
+                    print("reload5")
                 }
             }
         }
     }
 }
+
 
 

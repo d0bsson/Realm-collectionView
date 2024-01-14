@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D74A7EDA2B54469000873AA5 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A7ED92B54469000873AA5 /* RealmManager.swift */; };
 		D789BFE22B4F2D1E00AC0CF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D789BFE12B4F2D1E00AC0CF8 /* AppDelegate.swift */; };
 		D789BFE42B4F2D1E00AC0CF8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D789BFE32B4F2D1E00AC0CF8 /* SceneDelegate.swift */; };
 		D789BFE62B4F2D1E00AC0CF8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D789BFE52B4F2D1E00AC0CF8 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D74A7ED92B54469000873AA5 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D789BFDE2B4F2D1E00AC0CF8 /* Realm+ImagePicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Realm+ImagePicker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D789BFE12B4F2D1E00AC0CF8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D789BFE32B4F2D1E00AC0CF8 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D74A7ED82B54467300873AA5 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				D74A7ED92B54469000873AA5 /* RealmManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		D789BFD52B4F2D1E00AC0CF8 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 		D789BFE02B4F2D1E00AC0CF8 /* Realm+ImagePicker */ = {
 			isa = PBXGroup;
 			children = (
+				D74A7ED82B54467300873AA5 /* Managers */,
 				D789BFFD2B506E8E00AC0CF8 /* View */,
 				D789BFFA2B4FF44400AC0CF8 /* Cell */,
 				D789BFFE2B506EA300AC0CF8 /* Delegates */,
@@ -174,6 +185,7 @@
 			files = (
 				D789BFE62B4F2D1E00AC0CF8 /* ViewController.swift in Sources */,
 				D789BFE22B4F2D1E00AC0CF8 /* AppDelegate.swift in Sources */,
+				D74A7EDA2B54469000873AA5 /* RealmManager.swift in Sources */,
 				D789BFFC2B4FF48E00AC0CF8 /* CollectionViewCell.swift in Sources */,
 				D789BFE42B4F2D1E00AC0CF8 /* SceneDelegate.swift in Sources */,
 			);
