@@ -9,11 +9,12 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
     
+    private var names: [String] = []
     private var images: [UIImage] = []
-    private var realmMmanager = RealmManager()
+    private var storage = StorageManager()
+    private let realmManager = RealmManager()
     
     lazy var collection = {
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.itemSize = CGSize(width: view.frame.size.width / 4, height: view.frame.size.height / 10)
@@ -38,26 +39,33 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         navigationItem.rightBarButtonItem = addImage
     }
     
+    private func getNameImage(data: Data) {
+        let name = UUID().uuidString
+        self.names.append(name)
+        storage.saveImage(imageData: data, name: name)
+    }
+    
     lazy var addImageAction = UIAction { _ in
         var config = PHPickerConfiguration()
-        config.selectionLimit = 5
+        config.selectionLimit = 0
         
         let pickerVC = PHPickerViewController(configuration: config)
         pickerVC.delegate = self
         
         self.present(pickerVC, animated: true)
-        self.collection.reloadData()
     }
 }
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        images.count
+        realmManager.images?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
         cell.photo.image = images[indexPath.row]
+        cell.getImage(name: names[indexPath.row])
+        
         return cell
     }
 }
@@ -70,13 +78,13 @@ extension ViewController: PHPickerViewControllerDelegate {
             result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
                 if let image = object as? UIImage {
                     if let imageData = image.jpegData(compressionQuality: 0.1) {
-                        self.realmMmanager.saveImage(imageData: imageData)
+                        self.getNameImage(data: imageData)
+//                        self.storage.saveImage(imageData: imageData, name: self.name)
                         self.images.append(image)
                     }
                 }
                 DispatchQueue.main.async {
                     self.collection.reloadData()
-                    print("reload5")
                 }
             }
         }

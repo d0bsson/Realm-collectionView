@@ -2,39 +2,51 @@
 //  RealmManager.swift
 //  Realm+ImagePicker
 //
-//  Created by d0bsson on 14.01.2024.
+//  Created by d0bsson on 16.01.2024.
 //
 
 import Foundation
+import RealmSwift
 
 class RealmManager {
     
-    func urlPath() -> URL {
-        guard let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return URL.applicationDirectory }
-        print("Директория приложения найдена")
-        return path
+    let realm = try! Realm()
+    var images: [Image]?
+    
+    
+    //CREATE(add)
+    func addImage(image: Image) {
+        try! realm.write {
+            realm.add(image)
+        }
+        fetchImages()
+    }
+    //READ(fetch)
+    func fetchImages() {
+        let images = realm.objects(Image.self)
+        self.images = Array(images)
+    }
+    //update
+    func updateNote(id: String) {
+        guard let image = realm.object(ofType: Image.self, forPrimaryKey: id) else { return }
+        
+        try! realm.write {
+            image.date = DateManager.shared.getCurrentDate()
+        }
+        fetchImages()
+    }
+    //delete
+    func deleteImage(id: String) {
+        guard let image = realm.object(ofType: Image.self, forPrimaryKey: id) else { return }
+        
+        try! realm.write {
+            realm.delete(image)
+        }
+        fetchImages()
     }
     
-    func saveImage(imageData: Data) {
-        var path = urlPath()
-        let name = "\(imageData.description).jpeg"
-        
-        path.append(path: name)
-        do {
-            try imageData.write(to: path)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     
-    func loadImage(fileName: String) -> Data {
-        var path = urlPath()
-        path.append(path: fileName)
-        
-        if let imageData = try? Data(contentsOf: path) {
-            return  imageData
-        } else {
-            return Data()
-        }
+    init() {
+        fetchImages()
     }
 }

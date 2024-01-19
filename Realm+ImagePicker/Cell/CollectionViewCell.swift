@@ -9,6 +9,8 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
+    let storage = StorageManager()
+    
     lazy var photo: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
@@ -30,6 +32,10 @@ class CollectionViewCell: UICollectionViewCell {
             photo.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
             photo.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
+    }
+    
+    func getImage(name: String) {
+        photo.image = UIImage(data: storage.loadImage(fileName: name))
     }
     
     required init?(coder: NSCoder) {
