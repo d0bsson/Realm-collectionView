@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 class Image: Object {
+    
     @Persisted(primaryKey: true) var id = UUID().uuidString
     @Persisted var imageName = ""
     @Persisted var date = ""

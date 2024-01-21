@@ -9,7 +9,7 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    let storage = StorageManager.shared
+    let realm = RealmManager()
     
     lazy var photo: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -34,9 +34,11 @@ class CollectionViewCell: UICollectionViewCell {
         ])
     }
     
-    func getImage(name: String) {
-        photo.image = UIImage(data: storage.loadImage(fileName: name))
-    }
+//    func getImage(name: String) {
+//        photo.image = UIImage(data: storage.loadImage(fileName: name))
+//    }
+    
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

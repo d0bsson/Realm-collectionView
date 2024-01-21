@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D74A7EDA2B54469000873AA5 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D74A7ED92B54469000873AA5 /* StorageManager.swift */; };
 		D76D09AA2B571B71008D005A /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76D09A92B571B71008D005A /* RealmManager.swift */; };
 		D76D09AD2B571C1E008D005A /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76D09AC2B571C1E008D005A /* Image.swift */; };
 		D76D09AF2B572276008D005A /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76D09AE2B572276008D005A /* DateManager.swift */; };
@@ -22,7 +21,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D74A7ED92B54469000873AA5 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		D76D09A92B571B71008D005A /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		D76D09AC2B571C1E008D005A /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		D76D09AE2B572276008D005A /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
@@ -52,7 +50,6 @@
 		D74A7ED82B54467300873AA5 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				D74A7ED92B54469000873AA5 /* StorageManager.swift */,
 				D76D09A92B571B71008D005A /* RealmManager.swift */,
 				D76D09AE2B572276008D005A /* DateManager.swift */,
 			);
@@ -203,7 +200,6 @@
 				D76D09AD2B571C1E008D005A /* Image.swift in Sources */,
 				D789BFE62B4F2D1E00AC0CF8 /* ViewController.swift in Sources */,
 				D789BFE22B4F2D1E00AC0CF8 /* AppDelegate.swift in Sources */,
-				D74A7EDA2B54469000873AA5 /* StorageManager.swift in Sources */,
 				D789BFFC2B4FF48E00AC0CF8 /* CollectionViewCell.swift in Sources */,
 				D76D09AF2B572276008D005A /* DateManager.swift in Sources */,
 				D789BFE42B4F2D1E00AC0CF8 /* SceneDelegate.swift in Sources */,
