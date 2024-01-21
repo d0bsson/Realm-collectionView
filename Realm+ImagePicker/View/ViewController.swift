@@ -11,14 +11,13 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private var names: [String] = []
     private var images: [UIImage] = []
-    private var storage = StorageManager()
+    private var storage = StorageManager.shared
     private let realmManager = RealmManager()
     
     lazy var collection = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: view.frame.size.width / 4, height: view.frame.size.height / 10)
-        
+        layout.itemSize = CGSize(width: view.frame.size.width, height: view.frame.size.height / 4)
         let collection = UICollectionView(frame: view.frame, collectionViewLayout: layout)
         collection.register(CollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         collection.dataSource = self
@@ -27,11 +26,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collection.backgroundColor = .gray
         return collection
     }()
-    
+        
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.addSubview(collection)
         addNavigationItem()
+//        names = storage.loadNames()
     }
     
     private func addNavigationItem() {
@@ -40,8 +42,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func getNameImage(data: Data) {
-        let name = UUID().uuidString
+        let name = "\(UUID().uuidString).jpg"
         self.names.append(name)
+//        storage.saveNames(name: name)
         storage.saveImage(imageData: data, name: name)
     }
     
@@ -58,14 +61,15 @@ class ViewController: UIViewController, UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        realmManager.images?.count ?? 0
+//        realmManager.images?.count ?? 0
+        names.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        cell.photo.image = images[indexPath.row]
+//        cell.photo.image = images[indexPath.row]
         cell.getImage(name: names[indexPath.row])
-        
+        print("cellForItemAt")
         return cell
     }
 }
@@ -80,7 +84,7 @@ extension ViewController: PHPickerViewControllerDelegate {
                     if let imageData = image.jpegData(compressionQuality: 0.1) {
                         self.getNameImage(data: imageData)
 //                        self.storage.saveImage(imageData: imageData, name: self.name)
-                        self.images.append(image)
+//                        self.images.append(image)
                     }
                 }
                 DispatchQueue.main.async {

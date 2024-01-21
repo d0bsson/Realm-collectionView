@@ -9,7 +9,7 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    let storage = StorageManager()
+    let storage = StorageManager.shared
     
     lazy var photo: UIImageView = {
         $0.translatesAutoresizingMaskIntoConstraints = false
