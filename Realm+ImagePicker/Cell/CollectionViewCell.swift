@@ -37,6 +37,9 @@ class CollectionViewCell: UICollectionViewCell {
 //    func getImage(name: String) {
 //        photo.image = UIImage(data: storage.loadImage(fileName: name))
 //    }
+    func getImage() {
+        
+    }
     
     
     

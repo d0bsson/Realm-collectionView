@@ -11,7 +11,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private var names: [String] = []
     private var images: [UIImage] = []
-    private var storage = StorageManager.shared
     private let realmManager = RealmManager()
     
     lazy var collection = {
@@ -27,14 +26,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         return collection
     }()
     
-    lazy var addImageAction = UIAction { _ in
+    lazy var addImageAction = UIAction { [weak self] _ in
         var config = PHPickerConfiguration()
         config.selectionLimit = 0
         
         let pickerVC = PHPickerViewController(configuration: config)
         pickerVC.delegate = self
         
-        self.present(pickerVC, animated: true)
+        self?.present(pickerVC, animated: true)
     }
 
     override func viewDidLoad() {
@@ -64,7 +63,7 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? CollectionViewCell else { return UICollectionViewCell() }
-        cell.photo.image = 
+        cell.photo.image = images[indexPath.row]
         return cell
     }
 }
@@ -77,6 +76,7 @@ extension ViewController: PHPickerViewControllerDelegate {
             result.itemProvider.loadObject(ofClass: UIImage.self) { object, error in
                 if let image = object as? UIImage {
                     if let imageData = image.jpegData(compressionQuality: 0.1) {
+                        self.images
                         self.addToRealm(data: imageData)
                     }
                 }

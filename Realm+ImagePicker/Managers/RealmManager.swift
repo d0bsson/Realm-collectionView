@@ -13,6 +13,9 @@ class RealmManager {
     let realm = try! Realm()
     var images: [Image]?
     
+    init() {
+        fetchImages()
+    }
     
     //CREATE(add)
     func addImage(image: Image) {
@@ -42,11 +45,6 @@ class RealmManager {
         try! realm.write {
             realm.delete(image)
         }
-        fetchImages()
-    }
-    
-    
-    init() {
         fetchImages()
     }
 }
